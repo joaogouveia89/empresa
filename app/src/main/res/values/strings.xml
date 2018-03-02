@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Empresa</string>
+
+    <string name="welcome">BEM-VINDO AO EMPRESAS</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, contetur adipiscing elit. Nunc accumsan.</string>
+    <string name="entrar">Entrar</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="invalid_data">Email ou senha inválidos!</string>
 </resources>
