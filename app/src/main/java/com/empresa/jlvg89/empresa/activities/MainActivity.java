@@ -1,8 +1,10 @@
-package com.empresa.jlvg89.empresa;
+package com.empresa.jlvg89.empresa.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.empresa.jlvg89.empresa.R;
 
 public class MainActivity extends AppCompatActivity {
 
