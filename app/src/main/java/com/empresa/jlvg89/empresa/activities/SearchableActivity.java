@@ -65,10 +65,31 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
 
     @Override
     protected void onNewIntent(Intent intent) {
+        //atualiza a intent para caso se rotacione a tela do dispositivo
         setIntent(intent);
         handleSearch(intent);
     }
 
+
+    /**
+     * RETROFIT RESPONSE CALLBACK
+     * @param call
+     * @param response
+     */
+    @Override
+    public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
+        Log.i(TAG,  response.body().getEnterprises().get(0).toString());
+    }
+
+    /**
+     * RETROFIT FAILURE CALLBACK
+     * @param call
+     * @param t
+     */
+    @Override
+    public void onFailure(Call<QueryResult> call, Throwable t) {
+        Log.i(TAG, "ERROR: " + t.getMessage());
+    }
 
     /**
      * TRATAMENTO DA QUERY DIGITADA PELO USUÁRIO
@@ -110,15 +131,5 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
 
     private void initializeWidgets() {
         toolbar = (Toolbar) findViewById(R.id.tb_searchable_search);
-    }
-
-    @Override
-    public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
-        Log.i(TAG,  response.body().getEnterprises().get(0).toString());
-    }
-
-    @Override
-    public void onFailure(Call<QueryResult> call, Throwable t) {
-        Log.i(TAG, "ERROR: " + t.getMessage());
     }
 }
