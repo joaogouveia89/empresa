@@ -9,4 +9,6 @@
     <string name="invalid_data">Email ou senha inválidos!</string>
     <string name="no_internet">Verifique sua conexão com a internet!</string>
     <string name="cannot_login">Não foi possível realizar o login!</string>
+    <string name="search_hint">Pesquisar</string>
+    <string name="action_searchable_activity">searchable</string>
 </resources>
