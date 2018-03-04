@@ -182,5 +182,10 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
     public void onClickListener(View view, int position) {
         Snackbar s = Snackbar.make(getCurrentFocus(), "Position " + position, Snackbar.LENGTH_LONG);
         s.show();
+        Intent it = new Intent(SearchableActivity.this, EnterpriseDetailedActivity.class);
+        it.putExtra("enterprise-name", enterprises.get(position).getEnterprise_name());
+        it.putExtra("enterprise-description", enterprises.get(position).getDescription());
+        it.putExtra("enterprise-photo", enterprises.get(position).getPhoto());
+        startActivity(it);
     }
 }
