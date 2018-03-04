@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.empresa.jlvg89.empresa.R;
+import com.empresa.jlvg89.empresa.interfaces.RecyclerViewOnClickLIstenerHack;
 import com.empresa.jlvg89.empresa.models.Enterprise;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class EnterpriseAdapter extends RecyclerView.Adapter<EnterpriseAdapter.My
 
     private List<Enterprise> enterpriseList;
     private LayoutInflater layoutInflater;
+    private RecyclerViewOnClickLIstenerHack mRecyclerViewOnClickLIstenerHack;
 
     public EnterpriseAdapter(Context ctx, List<Enterprise> list){
         enterpriseList = list;
@@ -51,7 +53,11 @@ public class EnterpriseAdapter extends RecyclerView.Adapter<EnterpriseAdapter.My
          notifyItemInserted(position);
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public void setmRecyclerViewOnClickLIstenerHack(RecyclerViewOnClickLIstenerHack mRecyclerViewOnClickLIstenerHack){
+        this.mRecyclerViewOnClickLIstenerHack = mRecyclerViewOnClickLIstenerHack;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public ImageView enterprisePhoto;
         public TextView enterpriseName;
@@ -65,6 +71,15 @@ public class EnterpriseAdapter extends RecyclerView.Adapter<EnterpriseAdapter.My
             enterpriseName          = (TextView) itemView.findViewById(R.id.tv_enterprise_name);
             enterpriseBusiness      = (TextView) itemView.findViewById(R.id.tv_enterprise_business);
             enterpriseContry        = (TextView) itemView.findViewById(R.id.tv_enterprise_country);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(mRecyclerViewOnClickLIstenerHack != null){
+                mRecyclerViewOnClickLIstenerHack.onClickListener(view, getAdapterPosition());
+            }
         }
     }
 }

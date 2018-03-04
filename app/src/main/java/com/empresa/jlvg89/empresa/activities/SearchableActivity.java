@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 
 import com.empresa.jlvg89.empresa.R;
 import com.empresa.jlvg89.empresa.adapters.EnterpriseAdapter;
+import com.empresa.jlvg89.empresa.interfaces.RecyclerViewOnClickLIstenerHack;
 import com.empresa.jlvg89.empresa.models.Enterprise;
 import com.empresa.jlvg89.empresa.models.EnterpriseType;
 import com.empresa.jlvg89.empresa.models.QueryResult;
@@ -34,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchableActivity extends AppCompatActivity implements Callback<QueryResult>{
+public class SearchableActivity extends AppCompatActivity implements Callback<QueryResult>, RecyclerViewOnClickLIstenerHack{
 
     private static final String TAG = "SearchableActivity";
 
@@ -69,6 +71,7 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
 //        e.setEnterprise_type(et);
 //        enterprises.add(e);
         adapter = new EnterpriseAdapter(this, enterprises);
+        adapter.setmRecyclerViewOnClickLIstenerHack(this);
         recyclerView.setAdapter(adapter);
         handleSearch(getIntent());
     }
@@ -173,5 +176,11 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         toolbar         = (Toolbar) findViewById(R.id.tb_searchable_search);
         progressBar     = (ProgressBar) findViewById(R.id.pg_searchable);
         recyclerView    = (RecyclerView) findViewById(R.id.rv_searchable);
+    }
+
+    @Override
+    public void onClickListener(View view, int position) {
+        Snackbar s = Snackbar.make(getCurrentFocus(), "Position " + position, Snackbar.LENGTH_LONG);
+        s.show();
     }
 }
