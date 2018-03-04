@@ -8,18 +8,25 @@ import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.empresa.jlvg89.empresa.R;
+import com.empresa.jlvg89.empresa.adapters.EnterpriseAdapter;
 import com.empresa.jlvg89.empresa.models.Enterprise;
+import com.empresa.jlvg89.empresa.models.EnterpriseType;
 import com.empresa.jlvg89.empresa.models.QueryResult;
 import com.empresa.jlvg89.empresa.network.RetrofitService;
 import com.empresa.jlvg89.empresa.network.ServiceGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +39,10 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
     private static final String TAG = "SearchableActivity";
 
     private Toolbar toolbar;
+    private ProgressBar progressBar;
+    private RecyclerView recyclerView;
+    private List<Enterprise> enterprises;
+    private EnterpriseAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,24 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         initializeWidgets();
         setSearchActionBar(toolbar);
 
+        progressBar.setVisibility(View.INVISIBLE);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        enterprises = new ArrayList<Enterprise>();
+//        Enterprise e = new Enterprise();
+//        e.setEnterprise_name("Xulambs");
+//        e.setCountry("Brazil");
+//        EnterpriseType et = new EnterpriseType();
+//        et.setEnterprise_type_name("Business");
+//        e.setEnterprise_type(et);
+//        enterprises.add(e);
+        adapter = new EnterpriseAdapter(this, enterprises);
+        recyclerView.setAdapter(adapter);
         handleSearch(getIntent());
     }
 
@@ -79,6 +108,9 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
     @Override
     public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
         Log.i(TAG,  response.body().getEnterprises().get(0).toString());
+        refillingEnterprisesList(response.body().getEnterprises());
+        progressBar.setVisibility(View.INVISIBLE);
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -91,6 +123,13 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         Log.i(TAG, "ERROR: " + t.getMessage());
     }
 
+     private void refillingEnterprisesList(List<Enterprise> newList){
+        enterprises.clear();
+
+        for(Enterprise e : newList){
+            enterprises.add(e);
+        }
+     }
     /**
      * TRATAMENTO DA QUERY DIGITADA PELO USUÁRIO
      * @param intent
@@ -122,6 +161,7 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         RetrofitService service = ServiceGenerator.createService(RetrofitService.class, headers);
 
         Call<QueryResult> call = service.fetchEnterprisesByName(query);
+        progressBar.setVisibility(View.VISIBLE);
         call.enqueue(this);
     }
 
@@ -130,6 +170,8 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
     }
 
     private void initializeWidgets() {
-        toolbar = (Toolbar) findViewById(R.id.tb_searchable_search);
+        toolbar         = (Toolbar) findViewById(R.id.tb_searchable_search);
+        progressBar     = (ProgressBar) findViewById(R.id.pg_searchable);
+        recyclerView    = (RecyclerView) findViewById(R.id.rv_searchable);
     }
 }
