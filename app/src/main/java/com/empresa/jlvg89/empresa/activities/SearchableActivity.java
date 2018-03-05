@@ -105,10 +105,15 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
      */
     @Override
     public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
-        Log.i(TAG,  response.body().getEnterprises().get(0).toString());
-        refillingEnterprisesList(response.body().getEnterprises());
-        progressBar.setVisibility(View.INVISIBLE);
-        adapter.notifyDataSetChanged();
+        if(response.body().getEnterprises().size() == 0){
+            Snackbar s = Snackbar.make(getCurrentFocus(), getString(R.string.search_empty), Snackbar.LENGTH_LONG);
+            s.show();
+            progressBar.setVisibility(View.INVISIBLE);
+        }else{
+            refillingEnterprisesList(response.body().getEnterprises());
+            progressBar.setVisibility(View.INVISIBLE);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -175,8 +180,6 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
 
     @Override
     public void onClickListener(View view, int position) {
-        Snackbar s = Snackbar.make(getCurrentFocus(), "Position " + position, Snackbar.LENGTH_LONG);
-        s.show();
         Intent it = new Intent(SearchableActivity.this, EnterpriseDetailedActivity.class);
         it.putExtra("enterprise-name", enterprises.get(position).getEnterprise_name());
         it.putExtra("enterprise-description", enterprises.get(position).getDescription());
