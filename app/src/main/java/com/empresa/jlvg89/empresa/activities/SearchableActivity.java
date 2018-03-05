@@ -54,6 +54,7 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         initializeWidgets();
         setSearchActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setHasFixedSize(true);
 
@@ -63,13 +64,7 @@ public class SearchableActivity extends AppCompatActivity implements Callback<Qu
         recyclerView.setLayoutManager(linearLayoutManager);
 
         enterprises = new ArrayList<Enterprise>();
-//        Enterprise e = new Enterprise();
-//        e.setEnterprise_name("Xulambs");
-//        e.setCountry("Brazil");
-//        EnterpriseType et = new EnterpriseType();
-//        et.setEnterprise_type_name("Business");
-//        e.setEnterprise_type(et);
-//        enterprises.add(e);
+
         adapter = new EnterpriseAdapter(this, enterprises);
         adapter.setmRecyclerViewOnClickLIstenerHack(this);
         recyclerView.setAdapter(adapter);

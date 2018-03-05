@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         }
         initializeWidgets();
         setSearchActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override

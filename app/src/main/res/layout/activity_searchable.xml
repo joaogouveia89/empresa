@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_searchable_search"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="wrap_content"
         android:background="@color/medium_pink"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -19,7 +19,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:src="@drawable/logo_nav"
+            android:foregroundGravity="center_horizontal"/>
+    </android.support.v7.widget.Toolbar>
 
     <ProgressBar
         android:id="@+id/pg_searchable"
@@ -32,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tb_searchable_search"
-        app:layout_constraintBottom_toTopOf="@id/rv_searchable" Of="@id/tb_searchable_search"
+        app:layout_constraintBottom_toTopOf="@id/rv_searchable"
         tools:layout_editor_absoluteY="60dp" />
 
     <android.support.v7.widget.RecyclerView
