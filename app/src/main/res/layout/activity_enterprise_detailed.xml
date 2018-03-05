@@ -38,21 +38,27 @@
 
     <ImageView
         android:id="@+id/iv_enterprise_detailed_logo"
-        android:layout_width="319dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="318dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="20dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/sv_enterprise_detailed"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_enterprise_detailed" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_enterprise_detailed"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
         android:id="@+id/sv_enterprise_detailed"
         android:layout_width="match_parent"
-        android:layout_height="271dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
 
