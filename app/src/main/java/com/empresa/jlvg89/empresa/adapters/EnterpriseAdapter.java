@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.empresa.jlvg89.empresa.R;
 import com.empresa.jlvg89.empresa.interfaces.RecyclerViewOnClickLIstenerHack;
 import com.empresa.jlvg89.empresa.models.Enterprise;
@@ -23,10 +24,12 @@ public class EnterpriseAdapter extends RecyclerView.Adapter<EnterpriseAdapter.My
     private List<Enterprise> enterpriseList;
     private LayoutInflater layoutInflater;
     private RecyclerViewOnClickLIstenerHack mRecyclerViewOnClickLIstenerHack;
+    private Context ctx;
 
     public EnterpriseAdapter(Context ctx, List<Enterprise> list){
         enterpriseList = list;
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.ctx = ctx;
     }
 
     @Override
@@ -41,6 +44,11 @@ public class EnterpriseAdapter extends RecyclerView.Adapter<EnterpriseAdapter.My
         holder.enterpriseName.setText(enterpriseList.get(position).getEnterprise_name());
         holder.enterpriseBusiness.setText(enterpriseList.get(position).getEnterprise_type().getEnterprise_type_name());
         holder.enterpriseContry.setText(enterpriseList.get(position).getCountry());
+        if(enterpriseList.get(position).getPhoto() == null){
+            holder.enterprisePhoto.setImageDrawable(ctx.getDrawable(R.drawable.ic_no_photo));
+        }else{
+            Glide.with(ctx).load(enterpriseList.get(position).getPhoto()).into(holder.enterprisePhoto);
+        }
     }
 
     @Override

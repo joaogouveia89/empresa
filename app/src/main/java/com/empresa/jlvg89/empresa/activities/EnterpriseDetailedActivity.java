@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.empresa.jlvg89.empresa.R;
 
 public class EnterpriseDetailedActivity extends AppCompatActivity  implements View.OnClickListener{
@@ -50,6 +51,11 @@ public class EnterpriseDetailedActivity extends AppCompatActivity  implements Vi
             enterpriseNameText = extras.getString("enterprise-name");
             enterpriseDescriptionText = extras.getString("enterprise-description");
             enterprisePhoto = extras.getString("enterprise-photo");
+            if(enterprisePhoto == null){
+                enterpriseImage.setImageDrawable(getDrawable(R.drawable.ic_no_photo));
+            }else{
+                Glide.with(this).load(enterprisePhoto).into(enterpriseImage);
+            }
         }
     }
 
