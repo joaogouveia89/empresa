@@ -12,4 +12,5 @@
     <string name="search_hint">Pesquisar</string>
     <string name="action_searchable_activity">searchable</string>
     <string name="search_empty">Não foram encontrados resultados!</string>
+    <string name="click_on_search_to_start">Clique na busca para iniciar.</string>
 </resources>
