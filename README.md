@@ -10,6 +10,7 @@
 ![Screenshot](https://i.imgur.com/WGc4gKK.png)
 
 ### Tela principal(home)
+![Screenshot](https://i.imgur.com/HsCzCzO.png)
 ![Screenshot](https://i.imgur.com/mip9ci7.png)
 
 ### Inserção de query para busca
